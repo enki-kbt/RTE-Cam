@@ -100,7 +100,7 @@ echo -e "${BOLD} ==========================================${RESET}"
 echo ""
 
 # Disable Streamlit's telemetry prompt and auto-open browser on headless systems
-"$PYTHON_CMD" -m streamlit run app.py \
+"$PYTHON_CMD" -m streamlit run app_rtec.py \
     --server.headless false \
     --server.port 8501 \
     --browser.gatherUsageStats false
