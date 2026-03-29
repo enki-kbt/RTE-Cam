@@ -19,4 +19,7 @@ tensorflow>=2.15.0,<3.0.0
 
 # --- Data & Plotting ---
 pandas>=2.0.0                      
-numpy>=1.24.0                      
+numpy>=1.24.0   
+
+# --- Optional: faster face detection ---
+# mtcnn>=0.1.1                  
