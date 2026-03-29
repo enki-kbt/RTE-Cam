@@ -35,7 +35,6 @@ Results are displayed through a live annotated video feed with a bounding box an
 ### Prerequisites
 - Python 3.9 or higher
 - A working webcam
-- ~2 GB free disk space (TensorFlow dependency)
 
 ### Step 1: Clone repository
 ```bash
@@ -43,31 +42,25 @@ git clone https://github.com/enki-kbt/RTE-Cam.git
 cd emotion-dashboard
 ```
 
-### Step 2 (strongly recommended): Create a virtual environment
-```bash
-# macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
+### Step 2: Run the app
+For Windows Users:
+Double-click the run.bat file in the project folder.
+(you can also run it from the command prompt by typing run.bat)
 
-# Windows
-python -m venv venv
-venv\Scripts\activate
+For Mac and Linux Users:
+Open your terminal, navigate to the folder, and execute the shell script
+
+```bash
+chmod +x run.sh  # (Only needed the first time to make it executable)
+./run.sh
 ```
 
-### Step 3: Install dependencies
-```bash
-pip install --upgrade pip
-pip install -r requirements.txt
-```
+When you execute the run script, it will:
+1. Verify that Python is installed on your system
+2. Read the requirements.txt file and automatically install any missing dependencies (like streamlit, opencv-python, and fer)
+3. Launch the streamlit server and automatically open the app in your default web browser
 
-> **TensorFlow note:** The first install downloads ~500 MB. On Apple Silicon (M1/M2/M3), you may need `tensorflow-macos` instead — see [Apple's guide](https://developer.apple.com/metal/tensorflow-plugin/).
-
-### Step 4: Run the app
-```bash
-streamlit run app.py
-```
-
-The dashboard will open automatically at `http://localhost:8501`.
+To stop the application, simply close the browser tab and press Ctrl + C in the terminal/command prompt window where the script is running.
 
 ---
 
