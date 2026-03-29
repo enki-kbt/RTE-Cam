@@ -54,7 +54,7 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-### 3. Install dependencies
+### Step 3: Install dependencies
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 
 > **TensorFlow note:** The first install downloads ~500 MB. On Apple Silicon (M1/M2/M3), you may need `tensorflow-macos` instead — see [Apple's guide](https://developer.apple.com/metal/tensorflow-plugin/).
 
-### 4. Run the app
+### Step 4: Run the app
 ```bash
 streamlit run app.py
 ```
