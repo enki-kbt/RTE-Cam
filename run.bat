@@ -58,19 +58,19 @@ echo.
 :: "--quiet" suppresses verbose download logs but still shows errors.
 :: "--exists-action i" silently skips packages already installed.
 :: This step is safe to run every time — pip is idempotent.
-echo  [3/4] Installing / verifying dependencies from requirements.txt...
+echo  [3/4] Installing / verifying dependencies from requirements_rtec.txt...
 echo  (This may take a few minutes the first time)
 echo.
 
 python -m pip install --quiet --upgrade pip
-python -m pip install --quiet -r requirements.txt
+python -m pip install --quiet -r requirements_rtec.txt
 
 if %errorlevel% neq 0 (
     echo.
     echo  [ERROR] Dependency installation failed.
     echo  Check your internet connection and try again.
     echo  If the problem persists, open a terminal and run:
-    echo      pip install -r requirements.txt
+    echo      pip install -r requirements_rtec.txt
     echo  to see the full error output.
     echo.
     pause
