@@ -21,22 +21,25 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Dark, neutral background for a "lab dashboard" feel */
-    .stApp { background-color: #0f1117; }
+    /* Main Background: A very dark, warm espresso brown */
+    .stApp { background-color: #221c1a; }
 
-    /* Tighten up metric card spacing */
+    /* Sidebar: A deep, rich forest green */
+    [data-testid="stSidebar"] { background-color: #1a2b22; }
+
+    /* Metric Cards: A sophisticated dark burgundy */
     [data-testid="metric-container"] {
-        background: #1e2130;
-        border: 1px solid #2e3250;
+        background: #3d1e20;
+        border: 1px solid #5a2c2f;
         border-radius: 8px;
         padding: 12px 16px;
     }
 
-    /* Subtle section headers */
-    h2, h3 { color: #c8d0e0; letter-spacing: 0.04em; }
+   /* Earthy, light camel text to match the brown aesthetic but maintain contrast */
+    h1, h2, h3, h4, p, label, span, div { color: #9e8265 !important; }
 
-    /* Make the sidebar a slightly lighter shade */
-    [data-testid="stSidebar"] { background-color: #161922; }
+    /* Darken the horizontal dividers so they blend well */
+    hr { border-color: #3f3632; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -45,14 +48,15 @@ st.markdown("""
 # ---------------------------------------------------------------------------
 
 EMOTION_COLORS = {
-    "angry":    "#e05c5c",
-    "disgust":  "#8e6bbf",
-    "fear":     "#e08c3c",
-    "happy":    "#6bc96b",
-    "sad":      "#5c8ee0",
-    "surprise": "#e0c45c",
-    "neutral":  "#9aaabb",
+    "angry":    "#9c2a2a", # Brick Red
+    "disgust":  "#5b6e36", # Olive Green
+    "fear":     "#b86b25", # Burnt Orange
+    "happy":    "#d4a373", # Warm Mustard/Sand
+    "sad":      "#47546b", # Slate Blue
+    "surprise": "#347a50", # Forest Green
+    "neutral":  "#7a7167", # Warm Taupe
 }
+
 
 HISTORY_LENGTH = 100
 EMOTIONS = list(EMOTION_COLORS.keys())
@@ -177,7 +181,7 @@ def load_fer_model():
     This is critical: without it, Streamlit's rerun model would reload
     the ~50MB MTCNN weights on every frame render.
     """
-    return FER(mtcnn=True)
+    return FER(mtcnn=False)
 
 detector = load_fer_model()
 
@@ -209,7 +213,7 @@ if st.session_state.running:
                 frame = cv2.flip(frame, 1)
                 st.session_state.frame_count += 1
 
-              if st.session_state.frame_count % detect_every_n == 0:
+                if st.session_state.frame_count % detect_every_n == 0:
                     results = detector.detect_emotions(frame)
                     if results:
                         best = max(results, key=lambda r: r["box"][2] * r["box"][3])
@@ -254,7 +258,7 @@ if st.session_state.running:
                 if chart_type == "Bar Chart (current frame)":
                     chart_placeholder.bar_chart(
                         chart_df.set_index("Emotion"),
-                        color="#ef5ecf",
+                        color="#d4a373", 
                         height=300,
                     )
                 else:
