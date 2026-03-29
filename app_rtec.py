@@ -209,7 +209,7 @@ if st.session_state.running:
                 frame = cv2.flip(frame, 1)
                 st.session_state.frame_count += 1
 
-                if st.session_state.frame_count % detect_every_n == 0:
+              if st.session_state.frame_count % detect_every_n == 0:
                     results = detector.detect_emotions(frame)
                     if results:
                         best = max(results, key=lambda r: r["box"][2] * r["box"][3])
@@ -217,19 +217,18 @@ if st.session_state.running:
                         face_detected = True
                         last_scores = best["emotions"]  
                         x, y, w, h = best["box"]
-                            dominant = max(last_scores, key=last_scores.get)
-                            st.session_state.dominant_emotion = dominant
-                            cv2.rectangle(frame, (x, y), (x + w, y + h),
-                                          (0, 255, 120), 2)
+                        
+                        dominant = max(last_scores, key=last_scores.get)
+                        st.session_state.dominant_emotion = dominant
+                        cv2.rectangle(frame, (x, y), (x + w, y + h),
+                                      (0, 255, 120), 2)
 
-                            label = f"{dominant} ({last_scores[dominant]:.0%})"
-                            cv2.putText(
-                                frame, label, (x, y - 10),
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.75,
-                                (0, 255, 120), 2, cv2.LINE_AA,
-                            )
-                        else:
-                            face_detected = False
+                        label = f"{dominant} ({last_scores[dominant]:.0%})"
+                        cv2.putText(
+                            frame, label, (x, y - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.75,
+                            (0, 255, 120), 2, cv2.LINE_AA,
+                        )
                     else:
                         face_detected = False
 
