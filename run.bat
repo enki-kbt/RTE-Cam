@@ -94,7 +94,7 @@ echo.
 :: streamlit run launches a local web server.
 :: We pass --server.headless false so the browser opens automatically.
 :: --server.port 8501 is the default; explicit here for clarity.
-python -m streamlit run app.py ^
+python -m streamlit run app_rtec.py ^
     --server.headless false ^
     --server.port 8501 ^
     --browser.gatherUsageStats false
