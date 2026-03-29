@@ -7,7 +7,7 @@
 #   ./run.sh
 # ==============================================================
 
-set -euo pipefail   # Exit immediately on error; treat unset vars as errors
+set -euo pipefail   
 
 # ── Colour codes for terminal output ──────────────────────────
 RED='\033[0;31m'
@@ -83,7 +83,7 @@ echo -e "${YELLOW}      (This may take a few minutes the first time)${RESET}"
 echo ""
 
 "$PYTHON_CMD" -m pip install --quiet --upgrade pip
-"$PYTHON_CMD" -m pip install --quiet -r requirements.txt
+"$PYTHON_CMD" -m pip install --quiet -r requirements_rtec.txt
 
 echo -e "${GREEN}[OK] All dependencies are ready.${RESET}"
 echo ""
