@@ -1,0 +1,22 @@
+# Real-Time Emotion Recognition Dashboard
+# =========================================
+# Python >= 3.9 recommended (3.11 tested)
+#
+# Pin minor versions for reproducibility but allow patch updates (security fixes).
+# Use: pip install -r requirements.txt
+
+# --- Core Web App ---
+streamlit>=1.35.0,<2.0.0          
+
+# --- Computer Vision ---
+opencv-python-headless>=4.9.0     
+
+# --- Emotion Recognition ---
+fer>=22.5.1                       
+
+# --- Deep Learning Backend (required by FER) ---
+tensorflow>=2.15.0,<3.0.0         
+
+# --- Data & Plotting ---
+pandas>=2.0.0                      
+numpy>=1.24.0                      
