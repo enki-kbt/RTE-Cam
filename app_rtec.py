@@ -1,6 +1,5 @@
 """
 Real-Time Emotion Recognition Dashboard
-
 """
 
 import time
@@ -8,19 +7,19 @@ import cv2
 import numpy as np
 import pandas as pd
 import streamlit as st
-from fer import FER
+from fer.fer import FER
 from collections import deque
 
 # ---------------------------------------------------------------------------
 # Page configuration and custom CSS 
 # ---------------------------------------------------------------------------
-(
+st.set_page_config(
     page_title="Emotion Recognition Dashboard",
     layout="wide",          
     initial_sidebar_state="expanded",
 )
 
-("""
+st.markdown("""
 <style>
     /* Dark, neutral background for a "lab dashboard" feel */
     .stApp { background-color: #0f1117; }
@@ -59,7 +58,7 @@ HISTORY_LENGTH = 100
 EMOTIONS = list(EMOTION_COLORS.keys())
 
 # ---------------------------------------------------------------------------
-# Session state initialisaation
+# Session state initialisation
 # ---------------------------------------------------------------------------
 
 if "emotion_history" not in st.session_state:
@@ -190,7 +189,7 @@ if st.session_state.running:
     if not cap.isOpened():
         st.error(
             f"❌ Could not open camera at index {camera_index}. "
-            "Check your camera is connected and not in use by an other app."
+            "Check your camera is connected and not in use by another app."
         )
         st.session_state.running = False
     else:
@@ -213,12 +212,11 @@ if st.session_state.running:
                 if st.session_state.frame_count % detect_every_n == 0:
                     results = detector.detect_emotions(frame)
                     if results:
-                        best = max(results, key=lambda r: r["score"])
+                        best = max(results, key=lambda r: r["box"][2] * r["box"][3])
 
-                        if best["score"] >= confidence_threshold:
-                            face_detected = True
-                            last_scores = best["emotions"]  
-                            x, y, w, h = best["box"]
+                        face_detected = True
+                        last_scores = best["emotions"]  
+                        x, y, w, h = best["box"]
                             dominant = max(last_scores, key=last_scores.get)
                             st.session_state.dominant_emotion = dominant
                             cv2.rectangle(frame, (x, y), (x + w, y + h),
